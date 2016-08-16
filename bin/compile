@@ -11,6 +11,7 @@ end
 BUILD_DIR=ARGV[0]
 ENV_DIR=ARGV[2]
 
+puts "version is 2016-08-15"
 puts "-----> Found an .oracle.yml"
 
 ORACLE_CONFIG = YAML.load_file("#{BUILD_DIR}/.oracle.yml")
