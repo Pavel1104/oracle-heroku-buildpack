@@ -17,8 +17,8 @@ puts "-----> Found an .oracle.yml"
 ORACLE_CONFIG = YAML.load_file("#{BUILD_DIR}/.oracle.yml")
 
 ORACLE_INSTANT_CLIENT_DIR="vendor/oracle_instantclient"
-ORACLE_INSTANT_CLIENT_URL="https://www.dropbox.com/s/6w1wuhss5tsm1iq/oracle-instantclient-full-10.1-linux.x64.tar.gz"
-# ORACLE_INSTANT_CLIENT_URL="https://www.dropbox.com/s/zq451jdun3dnnst/oracle-instantclient-full-12.1-linux.x64.tar.gz"
+# ORACLE_INSTANT_CLIENT_URL="https://www.dropbox.com/s/6w1wuhss5tsm1iq/oracle-instantclient-full-10.1-linux.x64.tar.gz"
+ORACLE_INSTANT_CLIENT_URL="https://www.dropbox.com/s/zq451jdun3dnnst/oracle-instantclient-full-12.1-linux.x64.tar.gz"
 # old link
 # ORACLE_INSTANT_CLIENT_URL="https://www.dropbox.com/s/ro5rfqwgtjdo75b/oracle-instantclient-full-12.1-linux.x64.tar.gz"
 ORACLE_INSTANT_CLIENT_FILENAME=ORACLE_INSTANT_CLIENT_URL.split(/\//).last
@@ -46,11 +46,6 @@ if File.exists?(File.join(BUILD_DIR,TNSNAMES_FILENAME))
   `ln -sf #{File.join('/app',TNSNAMES_FILENAME)} #{ORACLE_NETWORK_ADMIN_DIR}/tnsnames.ora`
 end
 
-LIBCLNTSH_FILENAME = 'libclntsh.so.10.1'
-if File.exists?(File.join('/app/vendor/oracle_instantclient/',LIBCLNTSH_FILENAME))
-  indent "Symlinking #{LIBCLNTSH_FILENAME} to /app/vendor/oracle_instantclient/"
-  `ln -s /app/vendor/oracle_instantclient/libclntsh.so.10.1 libclntsh.so`
-end
 
 SQLNET_FILENAME = ORACLE_CONFIG['sqlnet.ora']
 SQLNET_FILENAME = SQLNET_FILENAME || ''
@@ -82,5 +77,12 @@ open(File.join(ENV_DIR,'LD_LIBRARY_PATH'), 'w') do |f|
   end
   f.puts value
 end
+
+# LIBCLNTSH_FILENAME = 'libclntsh.so.10.1'
+# if File.exists?(File.join('/app/vendor/oracle_instantclient/',LIBCLNTSH_FILENAME))
+#   indent "Symlinking #{LIBCLNTSH_FILENAME} to /app/vendor/oracle_instantclient/"
+#   `ln -s /app/vendor/oracle_instantclient/libclntsh.so.10.1 libclntsh.so`
+#   puts 'simlink created Successfully'
+# end
 
 indent "Done!"
