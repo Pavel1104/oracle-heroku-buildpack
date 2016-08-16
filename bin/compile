@@ -46,6 +46,15 @@ if File.exists?(File.join(BUILD_DIR,TNSNAMES_FILENAME))
   `ln -sf #{File.join('/app',TNSNAMES_FILENAME)} #{ORACLE_NETWORK_ADMIN_DIR}/tnsnames.ora`
 end
 
+LIBCLNTSH_FILENAME = 'libclntsh.so.10.1'
+if File.exists?(File.join('/app/vendor/oracle_instantclient/',LIBCLNTSH_FILENAME))
+  indent "Symlinking #{LIBCLNTSH_FILENAME} to /app/vendor/oracle_instantclient/"
+  `ln -s /app/vendor/oracle_instantclient/libclntsh.so.10.1 libclntsh.so`
+end
+
+r = `apt-get install libaio1`
+puts "#{r} installed"
+
 SQLNET_FILENAME = ORACLE_CONFIG['sqlnet.ora']
 SQLNET_FILENAME = SQLNET_FILENAME || ''
 if File.exists?(File.join(BUILD_DIR,SQLNET_FILENAME))
