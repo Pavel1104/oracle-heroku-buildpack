@@ -52,14 +52,6 @@ if File.exists?(File.join('/app/vendor/oracle_instantclient/',LIBCLNTSH_FILENAME
   `ln -s /app/vendor/oracle_instantclient/libclntsh.so.10.1 libclntsh.so`
 end
 
-
-puts "------------"
-puts "------------"
-puts "------------"
-puts "------------"
-r = `apt-get install libaio1`
-puts "libaio1 installed"
-
 SQLNET_FILENAME = ORACLE_CONFIG['sqlnet.ora']
 SQLNET_FILENAME = SQLNET_FILENAME || ''
 if File.exists?(File.join(BUILD_DIR,SQLNET_FILENAME))
